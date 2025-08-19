@@ -97,7 +97,7 @@ const App = () => {
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="w-full max-w-md mx-auto">
           <CardHeader>
-            <CardTitle className="text-center text-2xl">City State Game</CardTitle>
+            <CardTitle className="text-center text-2xl">GeoKeys</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-center text-muted-foreground">
