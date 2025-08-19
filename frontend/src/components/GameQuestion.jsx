@@ -157,8 +157,8 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
             className={`text-lg ${isAutoCompleted ? 'border-green-500 bg-green-50 text-green-800' : ''}`}
           />
 
-          <div className="grid grid-cols-2 gap-2">
-            {filteredChoices.map((choice, index) => (
+          <div className="grid grid-cols-2 gap-2 grid-rows-2 h-24">
+            {filteredChoices.slice(0, 4).map((choice, index) => (
               <Button
                 key={index}
                 variant={filteredChoices.length === 1 ? "default" : "outline"}
@@ -180,9 +180,9 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
           </div>
 
           {filteredChoices.length === 0 && (
-            <p className="text-center text-muted-foreground">
+            <div className="text-center text-muted-foreground mt-4">
               No states match your input
-            </p>
+            </div>
           )}
         </div>
       </CardContent>
