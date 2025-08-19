@@ -46,10 +46,21 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
     
     // Reset focus/active states on mobile buttons
     if (isMobile) {
-      // Blur any currently focused element to reset button states
+      // Aggressive mobile browser reset
       if (document.activeElement) {
         document.activeElement.blur()
       }
+      
+      // Reset all buttons in the container to default state
+      setTimeout(() => {
+        document.querySelectorAll('button').forEach(btn => {
+          btn.style.backgroundColor = 'white'
+          btn.style.borderColor = '#e5e7eb'
+          btn.blur()
+          // Force style recalculation
+          btn.offsetHeight
+        })
+      }, 100)
     } else {
       // Focus input when component mounts or question changes on desktop
       setTimeout(() => {
@@ -207,25 +218,44 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
                   className="text-center justify-center py-4 text-base font-medium border border-gray-200 rounded-md bg-white hover:bg-blue-50 hover:border-blue-300 transition-colors active:scale-95 min-h-[60px] disabled:opacity-50 disabled:pointer-events-none"
                   style={{ 
                     WebkitTapHighlightColor: 'transparent',
+                    WebkitTouchCallout: 'none',
+                    WebkitUserSelect: 'none',
+                    KhtmlUserSelect: 'none',
+                    MozUserSelect: 'none',
+                    msUserSelect: 'none',
+                    userSelect: 'none',
                     outline: 'none',
-                    boxShadow: 'none'
+                    boxShadow: 'none',
+                    border: '1px solid #e5e7eb',
+                    backgroundColor: 'white'
                   }}
                   onClick={(e) => {
-                    handleMobileStateSelect(choice)
+                    // Force immediate visual reset
+                    e.target.style.backgroundColor = 'white'
+                    e.target.style.borderColor = '#e5e7eb'
                     e.target.blur()
-                    e.target.style.backgroundColor = ''
-                    e.target.style.borderColor = ''
+                    e.preventDefault()
+                    
+                    handleMobileStateSelect(choice)
                   }}
                   onTouchStart={(e) => {
                     e.target.style.backgroundColor = '#dbeafe'
                     e.target.style.borderColor = '#93c5fd'
                   }}
                   onTouchEnd={(e) => {
+                    // Immediate reset for real mobile browsers
+                    e.target.style.backgroundColor = 'white'
+                    e.target.style.borderColor = '#e5e7eb'
+                    e.target.blur()
+                    
+                    // Additional delayed reset for stubborn mobile browsers
                     setTimeout(() => {
-                      e.target.style.backgroundColor = ''
-                      e.target.style.borderColor = ''
+                      e.target.style.backgroundColor = 'white'
+                      e.target.style.borderColor = '#e5e7eb'
                       e.target.blur()
-                    }, 100)
+                      // Force style recalculation
+                      e.target.offsetHeight
+                    }, 50)
                   }}
                 >
                   {choice}
