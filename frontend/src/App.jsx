@@ -5,7 +5,7 @@ import GameQuestion from './components/GameQuestion'
 import GameResults from './components/GameResults'
 import Leaderboard from './components/Leaderboard'
 
-const API_BASE = 'http://localhost:5000/api'
+const API_BASE = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api'
 
 const App = () => {
   const [gameState, setGameState] = useState('menu') // menu, playing, results, leaderboard
@@ -25,13 +25,20 @@ const App = () => {
     }
   }
 
-  const fetchLeaderboard = async () => {
+  const fetchLeaderboard = () => {
     try {
-      const response = await fetch(`${API_BASE}/leaderboard`)
-      const data = await response.json()
-      setLeaderboard(data)
+      const stored = localStorage.getItem('geokeys-leaderboard')
+      const data = stored ? JSON.parse(stored) : []
+      // Sort by score desc, then by correct answers desc, then by time asc
+      data.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score
+        if (b.correct_answers !== a.correct_answers) return b.correct_answers - a.correct_answers
+        return a.total_time - b.total_time
+      })
+      setLeaderboard(data.slice(0, 10)) // Top 10
     } catch (error) {
       console.error('Failed to fetch leaderboard:', error)
+      setLeaderboard([])
     }
   }
 
@@ -58,23 +65,42 @@ const App = () => {
 
   const submitScore = async (scoreData) => {
     try {
-      await fetch(`${API_BASE}/submit-score`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(scoreData),
-      })
-      await fetchLeaderboard()
+      // Add timestamp and ID for localStorage
+      const scoreWithId = {
+        ...scoreData,
+        id: Date.now(),
+        timestamp: new Date().toISOString()
+      }
+      
+      // Save to localStorage
+      const stored = localStorage.getItem('geokeys-leaderboard')
+      const currentScores = stored ? JSON.parse(stored) : []
+      currentScores.push(scoreWithId)
+      localStorage.setItem('geokeys-leaderboard', JSON.stringify(currentScores))
+      
+      // Also try to submit to API (for future database integration)
+      try {
+        await fetch(`${API_BASE}/submit-score`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(scoreData),
+        })
+      } catch (apiError) {
+        console.log('API submission failed (expected in free version):', apiError)
+      }
+      
+      fetchLeaderboard()
     } catch (error) {
       console.error('Failed to submit score:', error)
       throw error
     }
   }
 
-  const showLeaderboard = async () => {
+  const showLeaderboard = () => {
     setLoading(true)
-    await fetchLeaderboard()
+    fetchLeaderboard()
     setGameState('leaderboard')
     setLoading(false)
   }

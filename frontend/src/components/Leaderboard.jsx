@@ -9,23 +9,30 @@ const Leaderboard = ({ scores }) => {
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
-          {scores.map((score, index) => (
-            <div
-              key={score.id}
-              className="flex justify-between items-center p-3 rounded-lg bg-muted"
-            >
-              <div className="flex items-center space-x-3">
-                <span className="font-bold text-lg">#{index + 1}</span>
-                <span className="font-medium">{score.player_name}</span>
-              </div>
-              <div className="text-right">
-                <div className="font-bold text-lg text-primary">{score.score} points</div>
-                <div className="text-sm text-muted-foreground">
-                  {score.correct_answers}/10 correct • {score.total_time.toFixed(1)}s
+          {scores.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground">
+              <p>No scores yet! Play a game to see your scores here.</p>
+              <p className="text-sm mt-2">Scores are stored locally in your browser.</p>
+            </div>
+          ) : (
+            scores.map((score, index) => (
+              <div
+                key={score.id}
+                className="flex justify-between items-center p-3 rounded-lg bg-muted"
+              >
+                <div className="flex items-center space-x-3">
+                  <span className="font-bold text-lg">#{index + 1}</span>
+                  <span className="font-medium">{score.player_name}</span>
+                </div>
+                <div className="text-right">
+                  <div className="font-bold text-lg text-primary">{score.score} points</div>
+                  <div className="text-sm text-muted-foreground">
+                    {score.correct_answers}/10 correct • {score.total_time.toFixed(1)}s
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
         
         <div className="mt-6 p-4 bg-muted rounded-lg">
