@@ -140,7 +140,7 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-4">      
+    <div className={`w-full mx-auto space-y-4 ${isMobile ? 'w-[95%] max-w-none px-2' : 'max-w-2xl'}`}>      
       <Card className="relative">
       {/* Animation Overlay */}
       {showResult && (
@@ -180,7 +180,7 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
         </div>
 
         <div className="text-center">
-          <h2 className="text-4xl font-bold mb-2">{question.city}</h2>
+          <h2 className={`font-bold mb-2 ${isMobile ? 'text-2xl' : 'text-4xl'}`}>{question.city}</h2>
           <p className="text-lg text-muted-foreground">{question.county}</p>
         </div>
 
@@ -195,7 +195,7 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
                 <Button
                   key={choice}
                   variant="outline"
-                  className="text-left justify-center py-4 text-lg font-medium hover:bg-blue-50 hover:border-blue-300 transition-colors focus:outline-none active:scale-95"
+                  className="text-center justify-center py-4 text-base font-medium hover:bg-blue-50 hover:border-blue-300 transition-colors focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:scale-95 min-h-[60px]"
                   disabled={isAnswered}
                   onClick={(e) => {
                     handleMobileStateSelect(choice)
