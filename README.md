@@ -1,6 +1,6 @@
 # 🌍 GeoKeys ⌨️
 
-**Where Geography Meets Typography!**
+**Where Geography Meets a Typing Tutor!**
 
 Transform your typing skills while exploring the United States, one city at a time. 
 
