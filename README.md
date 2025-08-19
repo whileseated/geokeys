@@ -4,7 +4,7 @@
 
 Transform your typing skills while exploring the United States, one city at a time. 
 
-![Screenshot](img/game_play.gif)
+![Screenshot](img/02.png)
 
 ## 🎯 What is GeoKeys?
 
@@ -41,7 +41,7 @@ Ever wondered if you could improve your typing speed while becoming a geography 
 
 ## 🏁 Getting Started
 
-![Screenshot](img/02.png)
+![Screenshot](img/game_play.gif)
 
 ### Prerequisites
 - Node.js (v14+)
@@ -55,17 +55,17 @@ Ever wondered if you could improve your typing speed while becoming a geography 
 cd backend
 pip install flask flask-cors flask-sqlalchemy pandas
 python import_data.py  # Load the city database
-python app.py          # Start the API server
+python app.py          # Start the API server (runs on port 5000)
 ```
 
 **Frontend Setup:**
 ```bash
 cd frontend
 npm install
-npm run dev            # Launch the game!
+npm run dev            # Launch the game! (runs on port 5173)
 ```
 
-Visit `http://localhost:3000` and start your GeoKeys adventure!
+Visit `http://localhost:5173` 
 
 ## 📈 Why GeoKeys?
 
