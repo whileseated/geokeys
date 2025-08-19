@@ -4,6 +4,18 @@
 
 Transform your typing skills while exploring the United States, one city at a time. 
 
+## 🎮 Play Now!
+
+<p align="center">
+  <a href="https://geokeys.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🎮%20Play%20GeoKeys-Live%20Game-blue?style=for-the-badge&color=4F46E5" alt="Play GeoKeys"/>
+  </a>
+</p>
+
+<p align="center">
+  <strong>🌐 <a href="https://geokeys.vercel.app">https://geokeys.vercel.app</a></strong>
+</p>
+
 <p align="center">
   <img src="img/02.png" alt="Screenshot" width="600"/>
 </p>
@@ -37,38 +49,37 @@ GeoKeys presents you with U.S. cities and challenges you to type the correct sta
 - Real-time keyboard visualization
 
 **Backend:**
-- Flask API for lightning-fast responses
-- SQLite database with optimized queries
-- RESTful endpoints for seamless gameplay
+- Vercel Serverless Functions (Python)
+- Static JSON data (173k+ US cities)
+- Edge-deployed API endpoints
+- Browser localStorage for personal leaderboards
 
-## 🏁 Getting Started
+## 🏁 Local Development
 
 <p align="center">
   <img src="img/game_play.gif" alt="Screenshot" width="600"/>
 </p>
 
 ### Prerequisites
-- Node.js (v14+)
-- Python (v3.8+)
+- Node.js (v16+)
+- Git
 
-### Installation
+### Local Setup
 
-**Backend Setup:**
 ```bash
-cd backend
-pip install flask flask-cors flask-sqlalchemy pandas
-python import_data.py  # Load the city database
-python app.py          # Start the API server (runs on port 5000)
-```
+# Clone the repository
+git clone https://github.com/whileseated/geokeys.git
+cd geokeys
 
-**Frontend Setup:**
-```bash
+# Install dependencies and run locally
 cd frontend
 npm install
-npm run dev            # Launch the game! (runs on port 5173)
+npm run dev
 ```
 
 Visit `http://localhost:5173` 
+
+**Note:** The live game runs on Vercel with serverless functions. For full local testing with API functions, use `npx vercel dev`. 
 
 ## 📈 Why GeoKeys?
 
@@ -78,6 +89,16 @@ Visit `http://localhost:5173`
 - **Gamification** - Points, timers, and leaderboards keep you engaged
 - **Data-Driven** - Track your improvement over time
 
+## 🚀 Deployment
+
+This app is deployed on [Vercel](https://vercel.com) using:
+- Serverless Functions for the API
+- Static hosting for the React frontend  
+- Edge CDN for global performance
+- Zero-config deployment from GitHub
+
 ---
 
 **Made with ❤️ for geography lovers and typing enthusiasts everywhere**
+
+**🎮 [Play GeoKeys Now](https://geokeys.vercel.app) | 🐙 [View Source](https://github.com/whileseated/geokeys)**
