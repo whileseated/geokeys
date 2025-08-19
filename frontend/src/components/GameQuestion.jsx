@@ -200,23 +200,36 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {question.choices.map((choice) => (
-                <Button
+                <button
                   key={choice}
-                  variant="outline"
-                  className="text-center justify-center py-4 text-base font-medium hover:bg-blue-50 hover:border-blue-300 transition-colors focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:scale-95 min-h-[60px]"
+                  type="button"
                   disabled={isAnswered}
+                  className="text-center justify-center py-4 text-base font-medium border border-gray-200 rounded-md bg-white hover:bg-blue-50 hover:border-blue-300 transition-colors active:scale-95 min-h-[60px] disabled:opacity-50 disabled:pointer-events-none"
+                  style={{ 
+                    WebkitTapHighlightColor: 'transparent',
+                    outline: 'none',
+                    boxShadow: 'none'
+                  }}
                   onClick={(e) => {
                     handleMobileStateSelect(choice)
-                    // Immediately blur the button to prevent persistent focus state
                     e.target.blur()
+                    e.target.style.backgroundColor = ''
+                    e.target.style.borderColor = ''
+                  }}
+                  onTouchStart={(e) => {
+                    e.target.style.backgroundColor = '#dbeafe'
+                    e.target.style.borderColor = '#93c5fd'
                   }}
                   onTouchEnd={(e) => {
-                    // Additional mobile-specific blur
-                    setTimeout(() => e.target.blur(), 0)
+                    setTimeout(() => {
+                      e.target.style.backgroundColor = ''
+                      e.target.style.borderColor = ''
+                      e.target.blur()
+                    }, 100)
                   }}
                 >
                   {choice}
-                </Button>
+                </button>
               ))}
             </div>
           </div>
