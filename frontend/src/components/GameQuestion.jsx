@@ -126,6 +126,14 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
     setIsAnswered(true)
     const isCorrect = selectedState === question.correct_answer
     
+    // Aggressively remove focus from all buttons
+    setTimeout(() => {
+      document.querySelectorAll('button').forEach(btn => {
+        btn.blur()
+        btn.classList.remove('focus', 'focus-visible')
+      })
+    }, 50)
+    
     // Show animation first
     setShowResult(isCorrect ? 'correct' : 'incorrect')
     
@@ -201,6 +209,10 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
                     handleMobileStateSelect(choice)
                     // Immediately blur the button to prevent persistent focus state
                     e.target.blur()
+                  }}
+                  onTouchEnd={(e) => {
+                    // Additional mobile-specific blur
+                    setTimeout(() => e.target.blur(), 0)
                   }}
                 >
                   {choice}
