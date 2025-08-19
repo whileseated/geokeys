@@ -44,14 +44,21 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
     setShowResult(null)
     setFilteredChoices(question.choices)
     
-    // Focus input when component mounts or question changes
-    // Use setTimeout to ensure DOM is ready
-    setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.focus()
+    // Reset focus/active states on mobile buttons
+    if (isMobile) {
+      // Blur any currently focused element to reset button states
+      if (document.activeElement) {
+        document.activeElement.blur()
       }
-    }, 100)
-  }, [question])
+    } else {
+      // Focus input when component mounts or question changes on desktop
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus()
+        }
+      }, 100)
+    }
+  }, [question, isMobile])
 
   useEffect(() => {
     if (userInput === '') {
@@ -188,9 +195,13 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
                 <Button
                   key={choice}
                   variant="outline"
-                  className="text-left justify-center py-4 text-lg font-medium hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                  className="text-left justify-center py-4 text-lg font-medium hover:bg-blue-50 hover:border-blue-300 transition-colors focus:outline-none active:scale-95"
                   disabled={isAnswered}
-                  onClick={() => handleMobileStateSelect(choice)}
+                  onClick={(e) => {
+                    handleMobileStateSelect(choice)
+                    // Immediately blur the button to prevent persistent focus state
+                    e.target.blur()
+                  }}
                 >
                   {choice}
                 </Button>
