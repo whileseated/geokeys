@@ -25,12 +25,6 @@ Ever wondered if you could improve your typing speed while becoming a geography 
 4. **Beat the Clock** - Answer as quickly as possible for maximum points
 5. **Climb the Ranks** - Submit your score and see how you stack up!
 
-## 🎮 Game Modes
-
-- **Standard Quiz** - Classic city-to-state matching
-- **Speed Round** - How many can you get right in 60 seconds?
-- **Perfect Run** - Can you get 10 in a row without a mistake?
-
 ## 🛠️ Tech Stack
 
 **Frontend:**
@@ -76,20 +70,6 @@ Visit `http://localhost:3000` and start your GeoKeys adventure!
 - **Visual Feedback** - See exactly which keys you're pressing
 - **Gamification** - Points, timers, and leaderboards keep you engaged
 - **Data-Driven** - Track your improvement over time
-
-## 🌟 Perfect For
-
-- Students learning U.S. geography
-- Anyone wanting to improve typing speed
-- Gamers who love educational challenges
-- Teachers looking for interactive learning tools
-- Geography enthusiasts and trivia lovers
-
----
-
-**Ready to become a GeoKeys champion?** 🏆
-
-*Type fast, think faster, and discover America one keystroke at a time!*
 
 ---
 
