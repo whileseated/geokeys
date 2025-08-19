@@ -11,7 +11,19 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
   const [isAnswered, setIsAnswered] = useState(false)
   const [isAutoCompleted, setIsAutoCompleted] = useState(false)
   const [showResult, setShowResult] = useState(null) // 'correct' | 'incorrect' | null
+  const [isMobile, setIsMobile] = useState(false)
   const inputRef = useRef(null)
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -101,6 +113,25 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
     }
   }
 
+  const handleMobileStateSelect = (selectedState) => {
+    if (isAnswered) return
+    
+    setIsAnswered(true)
+    const isCorrect = selectedState === question.correct_answer
+    
+    // Show animation first
+    setShowResult(isCorrect ? 'correct' : 'incorrect')
+    
+    // Call onAnswer after animation delay
+    setTimeout(() => {
+      onAnswer({
+        answer: selectedState,
+        correct: isCorrect,
+        timeElapsed: parseFloat(timeElapsed.toFixed(1))
+      })
+    }, 1200)
+  }
+
   return (
     <div className="w-full max-w-2xl mx-auto space-y-4">      
       <Card className="relative">
@@ -146,48 +177,71 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
           <p className="text-lg text-muted-foreground">{question.county}</p>
         </div>
 
-        <div className="space-y-4">
-          <Input
-            ref={inputRef}
-            placeholder="Start typing to filter states..."
-            value={userInput}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-            disabled={isAnswered}
-            className={`text-lg ${isAutoCompleted ? 'border-green-500 bg-green-50 text-green-800' : ''}`}
-          />
-
-          <div className="grid grid-cols-2 gap-2 grid-rows-2 h-24">
-            {filteredChoices.slice(0, 4).map((choice, index) => (
-              <Button
-                key={index}
-                variant={filteredChoices.length === 1 ? "default" : "outline"}
-                className={`text-left justify-start ${
-                  isAutoCompleted && filteredChoices.length === 1 
-                    ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' 
-                    : ''
-                }`}
-                disabled={isAnswered}
-                onClick={() => {
-                  if (filteredChoices.length === 1) {
-                    handleSubmit()
-                  }
-                }}
-              >
-                {choice}
-              </Button>
-            ))}
-          </div>
-
-          {filteredChoices.length === 0 && (
-            <div className="text-center text-muted-foreground mt-4">
-              No states match your input
+        {isMobile ? (
+          // Mobile interface: Tap state buttons
+          <div className="space-y-4">
+            <div className="text-center text-sm text-muted-foreground mb-4">
+              📱 Tap the correct state below
             </div>
-          )}
-        </div>
+            <div className="grid grid-cols-2 gap-3">
+              {question.choices.map((choice) => (
+                <Button
+                  key={choice}
+                  variant="outline"
+                  className="text-left justify-center py-4 text-lg font-medium hover:bg-blue-50 hover:border-blue-300 transition-colors"
+                  disabled={isAnswered}
+                  onClick={() => handleMobileStateSelect(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          // Desktop interface: Typing with filtering
+          <div className="space-y-4">
+            <Input
+              ref={inputRef}
+              placeholder="Start typing to filter states..."
+              value={userInput}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+              disabled={isAnswered}
+              className={`text-lg ${isAutoCompleted ? 'border-green-500 bg-green-50 text-green-800' : ''}`}
+            />
+
+            <div className="grid grid-cols-2 gap-2 grid-rows-2 h-24">
+              {filteredChoices.slice(0, 4).map((choice, index) => (
+                <Button
+                  key={index}
+                  variant={filteredChoices.length === 1 ? "default" : "outline"}
+                  className={`text-left justify-start ${
+                    isAutoCompleted && filteredChoices.length === 1 
+                      ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' 
+                      : ''
+                  }`}
+                  disabled={isAnswered}
+                  onClick={() => {
+                    if (filteredChoices.length === 1) {
+                      handleSubmit()
+                    }
+                  }}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
+
+            {filteredChoices.length === 0 && (
+              <div className="text-center text-muted-foreground mt-4">
+                No states match your input
+              </div>
+            )}
+          </div>
+        )}
       </CardContent>
     </Card>
-      <QwertyKeyboard />
+      {!isMobile && <QwertyKeyboard />}
 
     </div>
   )

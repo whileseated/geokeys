@@ -4,6 +4,9 @@
 
 Transform your typing skills while exploring the United States, one city at a time. 
 
+**🖥️ Desktop**: Full typing tutor experience with visual keyboard feedback  
+**📱 Mobile**: Tap-to-select gameplay for on-the-go geography challenges 
+
 ## 🎮 Play Now!
 
 <p align="center">
@@ -22,24 +25,36 @@ Transform your typing skills while exploring the United States, one city at a ti
 
 ## 🎯 What is GeoKeys?
 
-GeoKeys presents you with U.S. cities and challenges you to type the correct state as fast as possible. Watch the responsive QWERTY keyboard light up with every keystroke as you race against the clock.
+GeoKeys presents you with U.S. cities and challenges you to identify the correct state as fast as possible. 
+
+**🖥️ On Desktop:** Type state names and watch the responsive QWERTY keyboard light up with every keystroke as you race against the clock. Perfect for improving your typing speed and accuracy!
+
+**📱 On Mobile:** Tap to select the correct state from multiple choice options. Great for geography practice anywhere you go!
 
 ## ✨ Features
 
 🗺️ **Geography Challenge** - Test your knowledge of U.S. cities and their states  
-⌨️ **Visual Keyboard** - Watch keys light up as you type with our gorgeous QWERTY display  
+⌨️ **Typing Tutor** (Desktop) - Visual keyboard feedback and typing speed training  
+📱 **Mobile-Friendly** - Touch-friendly interface for gaming on the go  
 ⏱️ **Speed Training** - Race against time to improve both accuracy and speed  
 🎮 **Game Mechanics** - Score points, track progress, and climb the leaderboard  
-📊 **Performance Stats** - See your typing speed, accuracy, and geography knowledge improve  
-🏆 **Leaderboard** - Compete with others for the ultimate GeoKeys champion title  
+📊 **Performance Stats** - See your geography knowledge and speed improve over time  
+🏆 **Personal Leaderboard** - Track your best scores and improvement  
 
 ## 🚀 How to Play
 
+### 🖥️ Desktop Experience
 1. **See the City** - A U.S. city name appears with its county
 2. **Start Typing** - Begin typing the state name and watch the keyboard light up
 3. **Auto-Complete Magic** - The game helps you when you're on the right track
 4. **Beat the Clock** - Answer as quickly as possible for maximum points
-5. **Climb the Ranks** - Submit your score and see how you stack up!
+5. **Submit Score** - Track your improvement on your personal leaderboard
+
+### 📱 Mobile Experience
+1. **See the City** - A U.S. city name appears with its county
+2. **Tap to Answer** - Choose the correct state from four options
+3. **Beat the Clock** - Tap quickly for maximum points
+4. **Submit Score** - Track your geography knowledge progress
 
 ## 🛠️ Tech Stack
 
@@ -66,20 +81,9 @@ GeoKeys presents you with U.S. cities and challenges you to type the correct sta
 
 ### Local Setup
 
-```bash
-# Clone the repository
-git clone https://github.com/whileseated/geokeys.git
-cd geokeys
+The vercelification of the app made the previous version, which supported self-hosting, irrelevant. But if you can hang with vercel-cli, you can still get it to run locally. 
 
-# Install dependencies and run locally
-cd frontend
-npm install
-npm run dev
-```
-
-Visit `http://localhost:5173` 
-
-**Note:** The live game runs on Vercel with serverless functions. For full local testing with API functions, use `npx vercel dev`. 
+Or, in other words: the live game runs on Vercel with serverless functions. For full local testing with API functions, use `npx vercel dev`. 
 
 ## 📈 Why GeoKeys?
 
@@ -99,6 +103,6 @@ This app is deployed on [Vercel](https://vercel.com) using:
 
 ---
 
-**Made with ❤️ for geography lovers and typing enthusiasts everywhere**
+**Made with ❤️ for geography hounds and typing enthusiasts everywhere**
 
 **🎮 [Play GeoKeys Now](https://geokeys.vercel.app) | 🐙 [View Source](https://github.com/whileseated/geokeys)**
