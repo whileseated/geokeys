@@ -1,4 +1,4 @@
-# 🌍⌨️ GeoKeys
+# 🌍 GeoKeys ⌨️
 
 **Where Geography Meets Typography!**
 
