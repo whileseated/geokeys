@@ -4,11 +4,13 @@
 
 Transform your typing skills while exploring the United States, one city at a time. 
 
-![Screenshot](img/02.png)
+<p align="center">
+  <img src="img/02.png" alt="Screenshot" width="600"/>
+</p>
 
 ## 🎯 What is GeoKeys?
 
-Ever wondered if you could improve your typing speed while becoming a geography whiz? Wonder no more! GeoKeys presents you with U.S. cities and challenges you to type the correct state as fast as possible. Watch the responsive QWERTY keyboard light up with every keystroke as you race against the clock!
+GeoKeys presents you with U.S. cities and challenges you to type the correct state as fast as possible. Watch the responsive QWERTY keyboard light up with every keystroke as you race against the clock.
 
 ## ✨ Features
 
@@ -41,12 +43,13 @@ Ever wondered if you could improve your typing speed while becoming a geography 
 
 ## 🏁 Getting Started
 
-![Screenshot](img/game_play.gif)
+<p align="center">
+  <img src="img/game_play.gif" alt="Screenshot" width="600"/>
+</p>
 
 ### Prerequisites
 - Node.js (v14+)
 - Python (v3.8+)
-- A love for geography and typing!
 
 ### Installation
 
