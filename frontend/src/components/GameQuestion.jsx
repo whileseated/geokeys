@@ -113,11 +113,28 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
   const handleInputChange = (e) => {
     const newValue = e.target.value
     
-    // Always allow the user to modify their input
+    // If we're filtering down to one choice and user is trying to type more characters (not deleting)
+    // prevent the change
+    if (filteredChoices.length === 1 && newValue.length > userInput.length) {
+      // Don't allow typing more characters when we've filtered to one choice
+      return
+    }
+    
+    // Allow the change (either deleting or we have multiple choices)
     setUserInput(newValue)
     
     // If they're modifying auto-completed text, clear the auto-complete flag
     if (isAutoCompleted && newValue !== userInput) {
+      setIsAutoCompleted(false)
+    }
+  }
+
+  const handleKeyDown = (e) => {
+    // Handle backspace to reset filtering
+    if (e.key === 'Backspace' && filteredChoices.length === 1) {
+      e.preventDefault()
+      setUserInput('')
+      setFilteredChoices(question.choices)
       setIsAutoCompleted(false)
     }
   }
@@ -268,6 +285,7 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
               placeholder="Start typing to filter states..."
               value={userInput}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
               onKeyPress={handleKeyPress}
               disabled={isAnswered}
               className={`text-lg ${isAutoCompleted ? 'border-green-500 bg-green-50 text-green-800' : ''}`}
