@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card'
 import GameQuestion from './components/GameQuestion'
 import GameResults from './components/GameResults'
 import Leaderboard from './components/Leaderboard'
+import Footer from './components/Footer'
 
 const API_BASE = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api'
 
@@ -14,6 +15,8 @@ const App = () => {
   const [gameResults, setGameResults] = useState([])
   const [leaderboard, setLeaderboard] = useState([])
   const [loading, setLoading] = useState(false)
+  
+  const commitHash = typeof __GIT_COMMIT_HASH__ !== 'undefined' ? __GIT_COMMIT_HASH__ : 'dev'
 
   const fetchQuestion = async () => {
     try {
@@ -144,6 +147,7 @@ const App = () => {
             </div>
           </CardContent>
         </Card>
+        <Footer commitHash={commitHash} />
       </div>
     )
   }
@@ -157,6 +161,7 @@ const App = () => {
           roundNumber={currentRound}
           totalRounds={10}
         />
+        <Footer commitHash={commitHash} />
       </div>
     )
   }
@@ -170,6 +175,7 @@ const App = () => {
           onPlayAgain={startGame}
           onViewLeaderboard={showLeaderboardFromResults}
         />
+        <Footer commitHash={commitHash} />
       </div>
     )
   }
@@ -183,6 +189,7 @@ const App = () => {
             Back to Menu
           </Button>
         </div>
+        <Footer commitHash={commitHash} />
       </div>
     )
   }
