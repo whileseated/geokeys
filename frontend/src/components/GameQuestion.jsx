@@ -81,8 +81,9 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
       )
       setFilteredChoices(filtered)
       
-      // Auto-complete when only one choice remains
-      if (filtered.length === 1 && userInput.toLowerCase() !== filtered[0].toLowerCase()) {
+      // Auto-complete when only one choice remains, but only if not already auto-completed
+      // This prevents re-auto-completing when user is trying to edit
+      if (filtered.length === 1 && !isAutoCompleted && userInput.toLowerCase() !== filtered[0].toLowerCase()) {
         setUserInput(filtered[0])
         setIsAutoCompleted(true)
       }
@@ -112,17 +113,13 @@ const GameQuestion = ({ question, onAnswer, roundNumber, totalRounds }) => {
   const handleInputChange = (e) => {
     const newValue = e.target.value
     
-    // If auto-completed, only allow if the new value is shorter (backspace)
-    if (isAutoCompleted) {
-      if (newValue.length < userInput.length) {
-        setUserInput(newValue)
-        setIsAutoCompleted(false)
-      }
-      // Ignore other input when auto-completed
-      return
-    }
-    
+    // Always allow the user to modify their input
     setUserInput(newValue)
+    
+    // If they're modifying auto-completed text, clear the auto-complete flag
+    if (isAutoCompleted && newValue !== userInput) {
+      setIsAutoCompleted(false)
+    }
   }
 
   const handleKeyPress = (e) => {
